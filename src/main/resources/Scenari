@@ -1,0 +1,56 @@
+== MonthMailBatch ==
+
+- POUR envoyer un mail du mois on :
+-- récupère les évènements des différents ICS
+-- on ne garde que ceux du mois prochain
+-- avec lesquels met en forme un mail
+-- on envoi le mail formaté
+
+    - POUR récupérer les évènements des différents ICS
+    -- On récupère de la DB l'URL des ICS
+    -- On récupère les VEvent de chaque ICS
+    -- On supprime les VEvent invalid (Not available)
+    -- On convertie les VEvent en Event
+    -- On regroupe le tout
+
+        - POUR récupérer les VEvent de chaque ICS
+        -- On récupère le contenu de l'ICS au format string
+        -- On convertie le string en VEvent avec Biweekly
+
+        - POUR supprimer les VEvent invalid
+        -- On récupère le model de Summary invalid
+        -- On le compare au Sommary de chaque VEvent
+
+    - POUR ne garder que ceux du mois prochain
+    - On vérifie que la date d'entrée est au mois prochain
+
+    - POUR mettre en forme un mail
+    -- On récupère de la DB le template associé à la source et au Batch en cour
+    -- On remplace les éléments du template par les éléments de la source et des évents
+
+    - POUR envoyer le mail formaté
+    -- On converti le template en objet mail
+    -- On ouvre une session mail
+    -- On envoi
+
+
+== DailyMailBatch ==
+
+- POUR envoyer le mail du jour
+-- récupère les évènements des différents ICS
+-- on ne garde que ceux entre les dates définies
+-- On récupère tous ceux qui sont dans ICS mais ne sont pas en DB
+-- On récupère tous ceux qui ne sont pas dans l'ICS mais sont en DB
+-- On format un mail avec les évenèments différents et les évenements qui n'ont pas bougés
+-- on envoi le mail formaté
+-- On crée tous ceux qui sont dans ICS mais ne sont pas en DB
+-- On supprime tous ceux qui ne sont pas dans l'ICS mais sont en DB
+
+== API - OwnIcsEvents ==
+
+- Pour générer un ICS contenant les évènements de la DB - API
+-- On récupère les évènement de la DB, schéma API
+-- On converti chaque évènement en IEvent
+-- On les mets dans un ICalendar
+-- On écrit un fichier avec l'ICalendar
+-- On envoi ce fichier via API
