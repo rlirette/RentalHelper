@@ -1,7 +1,10 @@
 package com.rlirette.tools.rentalhelper.batchs.impl.sub;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 
+@Component
 public class DateDefiner {
 
     private static final LocalDate TO_MORROW = LocalDate.now().plusDays(1);
