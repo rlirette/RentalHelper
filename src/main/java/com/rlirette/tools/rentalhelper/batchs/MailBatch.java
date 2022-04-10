@@ -16,13 +16,13 @@ public class MailBatch {
 
     @Scheduled(cron = "00 00 12 15 * ?", zone = "Europe/Paris")
     public void sendNextMonthReservationsMail() {
-        log.info("------------ monthly batch ------------");
+        log.info("\n------------ monthly batch ------------\n");
         monthlyMailBatch.sendMailOfTheMonth();
     }
 
     @Scheduled(cron = "00 00 12 * * ?", zone = "Europe/Paris")
     public void sendRectificationMail() {
-        log.info("------------ daily batch ------------");
+        log.info("\n------------ daily batch ------------\n");
         dailyMailBatch.sendMailOfTheDay();
     }
 }

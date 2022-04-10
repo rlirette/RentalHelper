@@ -32,9 +32,9 @@ public class DailyMailBatch {
             final Set<Event> eventsIcsOfDateInterval = eventsFilter.keep(eventsIcs).after(dateDefiner.start()).before(dateDefiner.end());
             final Set<Event> eventsDbDateInterval = eventCrud.findAllAfter(dateDefiner.start()).andBefore(dateDefiner.end());
             final Set<Event> eventsToCreate = deductInFirstButNotInSecondArg(eventsIcsOfDateInterval, eventsDbDateInterval);
-            log.info("{} events to create", eventsToCreate.size());
+            log.info("\n{} events to create", eventsToCreate.size());
             final Set<Event> eventsToDelete = deductInFirstButNotInSecondArg(eventsDbDateInterval, eventsIcsOfDateInterval);
-            log.info("{} events to delete", eventsToDelete.size());
+            log.info("\n{} events to delete", eventsToDelete.size());
 
             if(eventsToCreate.isEmpty() && eventsToDelete.isEmpty())
                 return;
