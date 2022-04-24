@@ -30,7 +30,7 @@ public class EmailSender {
             final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             getMimeMessage(mimeMessage, mailStructure);
             javaMailSender.send(mimeMessage);
-            log.info("\nMonthMailBatch - mail successfully send to {}", Arrays.stream(mailStructure.getRecipient()).collect(Collectors.joining(", ")));
+            log.info("\n------------MonthMailBatch - mail successfully send to {}", Arrays.stream(mailStructure.getRecipient()).collect(Collectors.joining(", ")));
         }catch (Exception e){
             popup("Can't send mail cause : " + e.getMessage());
         }

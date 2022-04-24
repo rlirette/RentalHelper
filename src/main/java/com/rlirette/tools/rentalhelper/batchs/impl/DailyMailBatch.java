@@ -25,23 +25,25 @@ public class DailyMailBatch {
     private final EmailSender mailSender;
     private final DateDefiner dateDefiner;
 
-    public void sendMailOfTheDay(){
+    public void sendMailOfTheDay(boolean isMailInclude){
         sourceEventCrud.findAll().withTemplateName("update").forEach(source -> {
             final Set<String> icsUris = sourceEventCrud.deductIcsCalendarUriFrom(source.getSourcesIcs());
             final Set<Event> eventsIcs = calendarParser.findAllEventsFrom(icsUris);
             final Set<Event> eventsIcsOfDateInterval = eventsFilter.keep(eventsIcs).after(dateDefiner.start()).before(dateDefiner.end());
             final Set<Event> eventsDbDateInterval = eventCrud.findAllAfter(dateDefiner.start()).andBefore(dateDefiner.end());
             final Set<Event> eventsToCreate = deductInFirstButNotInSecondArg(eventsIcsOfDateInterval, eventsDbDateInterval);
-            log.info("\n{} events to create", eventsToCreate.size());
+            log.info("\n------------{} events to create", eventsToCreate.size());
             final Set<Event> eventsToDelete = deductInFirstButNotInSecondArg(eventsDbDateInterval, eventsIcsOfDateInterval);
-            log.info("\n{} events to delete", eventsToDelete.size());
+            log.info("\n------------{} events to delete\n\n", eventsToDelete.size());
 
             if(eventsToCreate.isEmpty() && eventsToDelete.isEmpty())
                 return;
 
             final Set<Event> eventsUnChanged = deductNotChangedEvents(eventsDbDateInterval, eventsToDelete);
-            final MailStructure mailStructure = eMailFormator.formatDaily(eventsUnChanged, eventsToCreate, eventsToDelete, source.getSourceMail());
-            mailSender.send(mailStructure, source);
+            if(isMailInclude) {
+                final MailStructure mailStructure = eMailFormator.formatDaily(eventsUnChanged, eventsToCreate, eventsToDelete, source.getSourceMail());
+                mailSender.send(mailStructure, source);
+            }
             final Set<Event> eventsUpdated = deductEventsToUpdate(eventsUnChanged, eventsToCreate);
             source.setEvents(eventsUpdated);
             sourceEventCrud.update(source);

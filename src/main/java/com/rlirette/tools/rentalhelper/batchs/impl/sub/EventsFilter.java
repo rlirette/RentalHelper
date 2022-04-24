@@ -46,7 +46,7 @@ public class EventsFilter {
                         .filter(e -> e.getStartDate().isAfter(startDate))
                         .filter(e -> e.getStartDate().isBefore(endDate))
                         .collect(Collectors.toSet());
-                log.info("\n{} ICS events found between {} and {}", eventsOfInterval.size(), format(startDate), format(endDate));
+                log.info("\n------------{} ICS events found between {} and {}", eventsOfInterval.size(), format(startDate), format(endDate));
                 return eventsOfInterval;
             }
         }

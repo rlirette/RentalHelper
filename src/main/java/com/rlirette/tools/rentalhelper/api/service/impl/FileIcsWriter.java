@@ -26,7 +26,7 @@ public class FileIcsWriter {
             icalWriter.write(ical);
             bufferedWriter.write(stringWriter.toString());
         } catch (IOException e) {
-            log.info("Unable to create ICS file", e.getMessage());
+            log.info("\n------------Unable to create ICS file", e.getMessage());
         } finally {
             return outputFile;
         }

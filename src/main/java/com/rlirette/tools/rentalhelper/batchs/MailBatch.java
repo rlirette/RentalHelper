@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.time.LocalDateTime;
+
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
@@ -16,13 +18,13 @@ public class MailBatch {
 
     @Scheduled(cron = "00 00 12 15 * ?", zone = "Europe/Paris")
     public void sendNextMonthReservationsMail() {
-        log.info("\n------------ monthly batch ------------\n");
+        log.info("\n\n------------ monthly batch ({}) ------------\n", LocalDateTime.now());
         monthlyMailBatch.sendMailOfTheMonth();
     }
 
     @Scheduled(cron = "00 00 12 * * ?", zone = "Europe/Paris")
     public void sendRectificationMail() {
-        log.info("\n------------ daily batch ------------\n");
-        dailyMailBatch.sendMailOfTheDay();
+        log.info("\n\n------------ daily batch ({}) ------------\n", LocalDateTime.now());
+        dailyMailBatch.sendMailOfTheDay(true);
     }
 }

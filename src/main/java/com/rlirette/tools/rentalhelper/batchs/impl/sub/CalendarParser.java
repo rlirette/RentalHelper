@@ -38,7 +38,7 @@ public class CalendarParser {
                 .map(this::parseToEvents)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
-        log.info("\n{} ICS events found", events.size());
+        log.info("\n------------{} ICS events found", events.size());
         return events;
     }
 

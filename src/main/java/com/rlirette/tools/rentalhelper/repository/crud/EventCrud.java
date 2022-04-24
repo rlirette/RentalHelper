@@ -34,7 +34,7 @@ public class EventCrud {
 
         public Set<Event> andBefore(LocalDate endDate){
             final Set<Event> eventsInInterval = eventRepository.findBetween(startDate, endDate);
-            log.info("{} DB events found between {} and {}", eventsInInterval.size(), format(startDate), format(endDate));
+            log.info("\n------------{} DB events found between {} and {}", eventsInInterval.size(), format(startDate), format(endDate));
             return eventsInInterval;
         }
     }

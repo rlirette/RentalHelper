@@ -22,11 +22,11 @@ class DateDefinerTest {
     void if_before_15_then_end_date_is_last_day_of_month(){
         final LocalDate end = dateDefiner.end();
 
-        if(currentDate.getDayOfMonth() < 15)
+        if(currentDate.getDayOfMonth() < 15) {
             assertThat(end.getMonth()).isEqualTo(currentDate.getMonth());
             assertThat(end.getDayOfMonth() > 25).isTrue();
             assertThat(end.getDayOfMonth()).isEqualTo(currentDate.lengthOfMonth());
-        if(currentDate.getDayOfMonth() >= 15) {
+        }else if(currentDate.getDayOfMonth() >= 15) {
             assertThat(end.getMonth()).isEqualTo(currentDate.getMonth().plus(1));
             assertThat(end.getDayOfMonth()).isEqualTo(15);
         }
