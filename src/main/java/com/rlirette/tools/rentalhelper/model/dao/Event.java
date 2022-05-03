@@ -26,5 +26,5 @@ public class Event implements Serializable {
     private String code;
 
     @Transient
-    private Boolean isToDelete;
+    private EventStatus status;
 }

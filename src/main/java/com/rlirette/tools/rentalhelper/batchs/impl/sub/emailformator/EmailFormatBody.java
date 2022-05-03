@@ -4,7 +4,10 @@ import com.rlirette.tools.rentalhelper.model.dao.Event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -30,13 +33,7 @@ public class EmailFormatBody {
                 .replace("<startDate/>", formatDate.dateFormat(event.getStartDate()))
                 .replace("<endDate/>", formatDate.dateFormat(event.getEndDate()))
                 .replace("<keyBoxCode/>", event.getCode())
-                .replace("<status/>", deductStatusFrom(event.getIsToDelete()));
-    }
-
-    private String deductStatusFrom(Boolean isToDelete){
-        if(isToDelete == null)
-            return "";
-        return isToDelete ? "Annulé" : "Créé";
+                .replace("<status/>", event.getStatus().value());
     }
 
     private List<Event> deductListSortedByStartDate(Set<Event> events){

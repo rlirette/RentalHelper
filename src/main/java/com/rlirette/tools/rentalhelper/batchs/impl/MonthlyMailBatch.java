@@ -31,7 +31,7 @@ public class MonthlyMailBatch {
             final Set<String> icsUris = sourceEventCrud.deductIcsCalendarUriFrom(source.getSourcesIcs());
             final Set<Event> eventsIcs = calendarParser.findAllEventsFrom(icsUris);
             final Set<Event> eventsIcsOfDateInterval = eventsFilter.keep(eventsIcs).after(LAST_DAY_OF_CURRENT_MONTH).before(FIRST_DAY_OF_THE_MONTH__IN_TWO_MONTHS);
-            final MailStructure mailStructure = eMailFormator.formatMonthly(eventsIcsOfDateInterval, source.getSourceMail());
+            final MailStructure mailStructure = eMailFormator.format(eventsIcsOfDateInterval, source.getSourceMail());
             mailSender.send(mailStructure, source);
         });
     }
