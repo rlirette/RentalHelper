@@ -12,7 +12,7 @@
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- Daily rollover -->
-            <fileNamePattern>C:/Users/Afroboy/Desktop/RentalHelper/logs/%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>C:\Users\Afroboy972\Desktop\RentalHelper\logs\%d{yyyy-MM-dd}.log</fileNamePattern>
 
             <!-- Keep 7 days' worth of history -->
             <maxHistory>7</maxHistory>

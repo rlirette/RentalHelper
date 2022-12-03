@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class UrlContentGetter {
 
     public String getContentFrom(String unparseUrl) {
-        URL url = parse(unparseUrl);
+        final URL url = parse(unparseUrl);
         return getContent(url);
     }
 

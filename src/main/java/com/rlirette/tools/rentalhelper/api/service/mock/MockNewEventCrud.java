@@ -37,7 +37,7 @@ public class MockNewEventCrud {
 
     private static SourceIcs getSourceIcsRentalHelper() {
         return SourceIcs.builder()
-                .icsCalendarUri("http://localhost:8080/api/ics")
+                .icsCalendarUri("http://localhost:8081/api/ics")
                 .name("rentalHelper")
                 .build();
     }
@@ -54,7 +54,7 @@ public class MockNewEventCrud {
 
     private static SourceMailContentHeaderRecipient getSourceMailContentHeaderRecipient() {
         SourceMailContentHeaderRecipient sourceMailContentHeaderRecipient = SourceMailContentHeaderRecipient.builder()
-                .recipient("mc.clean.net@gmail.com")
+                .recipient("lirjoce@yahoo.fr")
                 .build();
         return sourceMailContentHeaderRecipient;
     }
@@ -63,7 +63,7 @@ public class MockNewEventCrud {
         SourceMailContentTemplate sourceMailContentTemplateUpdateReservations = SourceMailContentTemplate.builder()
                 .title("[Black Diamond][404] Mise à jour planning (message automatique)")
                 .body("<html><body>" +
-                        "Bonjour MC Clean," +
+                        "Bonjour," +
                         "<br/><br/>" +
                         "Certains &eacute;v&egrave;nements ont &eacute;t&eacute; modifi&eacute;s. Ci dessous, le planning à jour :" +
                         "<br/>" +
@@ -85,7 +85,7 @@ public class MockNewEventCrud {
         return SourceMailContentTemplate.builder()
                     .title("[Black Diamond][404] Planning - <next_month/> (message automatique)")
                     .body("<html><body>" +
-                            "Bonjour MC Clean," +
+                            "Bonjour," +
                             "<br/><br/>" +
                             "Ci-dessous le planning du mois prochain :" +
                             "<br/>" +

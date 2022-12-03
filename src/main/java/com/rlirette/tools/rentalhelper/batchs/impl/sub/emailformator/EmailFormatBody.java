@@ -29,11 +29,13 @@ public class EmailFormatBody {
     }
 
     private String getEventLineFormatted(Event event, String itemTemplate){
+        final String status = event.getStatus() == null ? "" : event.getStatus().value();
+
         return itemTemplate
                 .replace("<startDate/>", formatDate.dateFormat(event.getStartDate()))
                 .replace("<endDate/>", formatDate.dateFormat(event.getEndDate()))
                 .replace("<keyBoxCode/>", event.getCode())
-                .replace("<status/>", event.getStatus().value());
+                .replace("<status/>", status);
     }
 
     private List<Event> deductListSortedByStartDate(Set<Event> events){
