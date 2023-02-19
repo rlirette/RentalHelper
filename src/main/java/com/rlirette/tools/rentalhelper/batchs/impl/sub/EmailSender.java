@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static com.rlirette.tools.rentalhelper.tools.Common.popup;
 
@@ -30,9 +28,12 @@ public class EmailSender {
             final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             getMimeMessage(mimeMessage, mailStructure);
             javaMailSender.send(mimeMessage);
-            log.info("\n------------Mail successfully send to {}", Arrays.stream(mailStructure.getRecipient()).collect(Collectors.joining(", ")));
+            log.info("\n------------Mail successfully send to {} - copy to {}",
+                    String.join(", ", mailStructure.getRecipient()),
+                    String.join(", ", mailStructure.getCopy()));
         }catch (Exception e){
             popup("Can't send mail cause : " + e.getMessage());
+            log.error("Can't send mail", e);
         }
     }
 
@@ -42,13 +43,12 @@ public class EmailSender {
         return javaMailSender;
     }
 
-    private MimeMessageHelper getMimeMessage(MimeMessage mimeMessage, MailStructure mailStructure) throws MessagingException {
+    private void getMimeMessage(MimeMessage mimeMessage, MailStructure mailStructure) throws MessagingException {
         final MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         mimeMessageHelper.setFrom(mailStructure.getTransmitter());
         mimeMessageHelper.setTo(mailStructure.getRecipient());
         mimeMessageHelper.setCc(mailStructure.getCopy());
         mimeMessageHelper.setSubject(mailStructure.getTitle());
         mimeMessageHelper.setText(mailStructure.getBody(), true);
-        return mimeMessageHelper;
     }
 }
