@@ -31,11 +31,10 @@ Lancer l'initiation de la DB en appellant l'URL suivant :
 
 ## Erreurs
 - Server returned HTTP response code: 400 for URL: <URL d'une source de données> : 
-  - l'URL n'est pas à jour. 
-    - A mettre à jour ou a supprimer dans la table **source_ics**
-  - Pop up "Can't sand email cause : Authentication failed"
-    - vérifier la config qui est mise dans la table **source_mail_config** (mail48.lwspanel.com pour lws, smtp.gmail.com pour gmail)
-  - - Pop up "Can't sand email cause : Failed message [...] <adresse email> : Sender adress rejected [...]"
-    - Vérifier l'adresse mail de l'emmeteur dans la table **source_mail**
-    - En profiter pour vérifier les récepteurs, table **source_mail_content_header_recipient** et les personnes en copie, table **source_mail_content_header_copy**
+  - l'URL n'est pas à jour. A mettre à jour ou a supprimer dans la table **source_ics**
+- Pop up "Can't sand email cause : Authentication failed"
+  - vérifier la config qui est mise dans la table **source_mail_config** (mail48.lwspanel.com pour lws, smtp.gmail.com pour gmail)
+- Pop up "Can't sand email cause : Failed message [...] <adresse email> : Sender adress rejected [...]"
+  - Vérifier l'adresse mail de l'emmeteur dans la table **source_mail**
+  - En profiter pour vérifier les récepteurs, table **source_mail_content_header_recipient** et les personnes en copie, table **source_mail_content_header_copy**
 
