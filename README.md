@@ -1,5 +1,8 @@
 # RentalHelper
-Application helping rental mails
+API / Batch d'envoi de mail des planning des réservations avec les données suivantes :
+- Date d'arrivée
+- Date de départ
+- Code de la boîte à clés à mettre
 
 ## Prérequis
 - Installer JDK 15 (l'API utilise la JDK 14)
