@@ -4,6 +4,7 @@ import com.rlirette.tools.rentalhelper.model.dao.Source;
 import com.rlirette.tools.rentalhelper.model.dao.ics.SourceIcs;
 import com.rlirette.tools.rentalhelper.model.dao.mail.SourceMail;
 import com.rlirette.tools.rentalhelper.model.dao.mail.config.SourceMailConfig;
+import com.rlirette.tools.rentalhelper.model.dao.mail.content.SourceMailContentHeaderCopy;
 import com.rlirette.tools.rentalhelper.model.dao.mail.content.SourceMailContentHeaderRecipient;
 import com.rlirette.tools.rentalhelper.model.dao.mail.content.SourceMailContentTemplate;
 
@@ -21,11 +22,10 @@ public class MockNewEventCrud {
     }
 
     private static SourceIcs getSourceIcsBooking() {
-        SourceIcs sourceIcsBooking = SourceIcs.builder()
+        return SourceIcs.builder()
                 .icsCalendarUri("https://admin.booking.com/hotel/hoteladmin/ical.html?t=2f7ae153-f10d-4758-aa73-a86b5c3dd8c7")
                 .name("booking")
                 .build();
-        return sourceIcsBooking;
     }
 
     private static SourceIcs getSourceIcsAirbnb() {
@@ -43,24 +43,29 @@ public class MockNewEventCrud {
     }
 
     private static SourceMail getSourceMail() {
-        SourceMail sourceMail = SourceMail.builder()
+        return SourceMail.builder()
                 .sourceMailConfig(getSourceMailConfig())
                 .sourceMailContentTemplate(Set.of(getSourceMailContentTemplateCreate(), getSourceMailContentTemplateUpdate()))
-                .transmitter("raphael.lirette@gmail.com")
+                .transmitter("gestion@lacherry.fr")
                 .recipients(Set.of(getSourceMailContentHeaderRecipient()))
+                .mailCopies(Set.of(getSourceMailContentHeaderCopy()))
                 .build();
-        return sourceMail;
     }
 
     private static SourceMailContentHeaderRecipient getSourceMailContentHeaderRecipient() {
-        SourceMailContentHeaderRecipient sourceMailContentHeaderRecipient = SourceMailContentHeaderRecipient.builder()
+        return SourceMailContentHeaderRecipient.builder()
                 .recipient("lirjoce@yahoo.fr")
                 .build();
-        return sourceMailContentHeaderRecipient;
+    }
+
+    private static SourceMailContentHeaderCopy getSourceMailContentHeaderCopy() {
+        return SourceMailContentHeaderCopy.builder()
+                .copy("raphael.lirette@gmail.com")
+                .build();
     }
 
     private static SourceMailContentTemplate getSourceMailContentTemplateUpdate() {
-        SourceMailContentTemplate sourceMailContentTemplateUpdateReservations = SourceMailContentTemplate.builder()
+        return SourceMailContentTemplate.builder()
                 .title("[Black Diamond][404] Mise à jour planning (message automatique)")
                 .body("<html><body>" +
                         "Bonjour," +
@@ -78,7 +83,6 @@ public class MockNewEventCrud {
                 .item("<tr style=\"border-bottom: 1px solid #dddddd;\"><td style=\"padding: 12px 15px;\"><startDate/></td><td style=\"padding: 12px 15px;\"><endDate/></td><td style=\"padding: 12px 15px;\"><keyBoxCode/></td><td style=\"padding: 12px 15px;\"><status/></td></tr>")
                 .templateName("update")
                 .build();
-        return sourceMailContentTemplateUpdateReservations;
     }
 
     private static SourceMailContentTemplate getSourceMailContentTemplateCreate() {
@@ -102,11 +106,10 @@ public class MockNewEventCrud {
     }
 
     private static SourceMailConfig getSourceMailConfig() {
-        SourceMailConfig sourceMailConfig = SourceMailConfig.builder()
-                .host("smtp.gmail.com")
+        return SourceMailConfig.builder()
+                .host("mail48.lwspanel.com")
                 .port("587")
                 .build();
-        return sourceMailConfig;
     }
 
 }
